@@ -1,0 +1,76 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block cart_content %}
+<div class="container">
+<div style="margin-top:80px" class="row">
+	<div class="col-lg-12">
+		<div class="box-element shadow-lg">
+
+			<a  class="btn btn-outline-dark" href="{% url 'home' %}">&#x2190;</a>
+
+			<br>
+			<br>
+			<table class="table">
+				<tr>
+					<th><h5>Items: <strong>{{order.get_cart_items}}</strong></h5></th>
+					<th><h5>Total: <strong>{{order.get_cart_total}}</strong></h5></th>
+					<th>
+						<a  style="float:right; margin:5px;" class="btn btn-success" href="{% url 'checkout' %}">Checkout</a>
+					</th>
+				</tr>
+			</table>
+		</div>
+		<br>
+		</div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table class="table">
+                <tr>
+                    <th class="col-lg-4"></th>
+                    <th class="col-lg-3">item</th>
+                    <th >price</th>
+                    <th >quantity</th>
+                    <th >total</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <th class="col-lg-5">
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0">
+                              <div class="col-md-4">
+                                <img src="{{item.product.ImageURL}}" class="img-fluid rounded-start" alt="...">
+                              </div>
+                              <div class="col-md-8">
+                                <div class="card-body">
+                                  <h6 class="card-title">{{item.product.name}}</h6>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                    </th>
+                    <th class="col-lg-4">{{item.product.name}}</th>
+                    <th>{{item.product.price}}</th>
+                    <th>
+                        <div style="display:flex;border:solid 1px #ccc;border-radius:5px" class="quantity_add text-center">
+                            <div  style="flex:1; color:black;" class="quantity_icon-down ">
+                                <a style="padding: 5px;text-decoration: none;" href="#" data-product = {{item.product.id}} data-action="remove" class=" update-cart">
+                                    -
+                                </a>
+                            </div>
+                            <div  style="flex:1;border-left:solid 1px #ccc;border-right:solid 1px #ccc;" class = "quantity_text ">{{item.quantity}}</div>
+                            <div  style="flex:1;"  class="quantity_icon-up update-cart">
+                                <a style="padding: 5px;text-decoration: none;" href="#" data-product = {{item.product.id}} data-action="add" class=" update-cart" >
+                                   +
+                                </a>
+                            </div>
+                        </div>
+                    </th>
+                    <th>{{item.get_total}}</th>
+                </tr>
+                {%endfor%}
+            </table>
+        </div>
+    </div>
+</div>
+</div>
+{% endblock cart_content %}

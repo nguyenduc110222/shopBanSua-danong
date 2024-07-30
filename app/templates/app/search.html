@@ -1,0 +1,26 @@
+{% extends "app/base.html" %}
+{%load static%}
+{%block search%}
+<div style ="margin-top:80px">
+    <div class="container">
+        <h5>results: {{searched}}</h5>
+        <div class="row">
+        {%for product in keys %}
+        <div class="col-lg-3 ">
+        <div class="card card_container shadow-lg" style="width: 17rem; margin-top:20px">
+            <img src="{{product.ImageURL}}" class="card-img-top" alt="...">
+          <div class="card-body">
+            <a style="text-decoration: none;" href=""><h6 class="card-title">{{product.name}}</h6></a>
+            <p class="card-text"></p>
+            <h6 class="card-title">{{product.price}}</h6>
+            <button data-product = {{product.id}} data-action = "add" class="btn btn-danger add-btn update-cart ">Thêm vào giỏ hàng </button>
+            <a href="#" class="btn btn-primary">Xem</a>
+          </div>
+        </div>
+        </div>
+        {%endfor%}
+        
+        </div>
+        </div>
+</div>
+{%endblock search%}
